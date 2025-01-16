@@ -1,6 +1,7 @@
 using StarterAssets;
 using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
 public class HeadIKEditor : MonoBehaviour
 {
     // Attach this script to the player object
@@ -23,43 +24,43 @@ public class HeadIKEditor : MonoBehaviour
 
     [Header("Walk Config")]
     [Tooltip("Default weight for the head IK")]
-    [Range(0f, 1f)] public float headWeight = 1.0f;
+    [Range(0f, 1f)][SerializeField] private float headWeight = 1.0f;
     [Tooltip("Default weight for the body")]
-    [Range(0f, 1f)] public float bodyWeight = 0.3f;
+    [Range(0f, 1f)][SerializeField] private float bodyWeight = 0.3f;
     [Tooltip("Weight for head when looking behind")]
-    [Range(0f, 1f)] public float headWeightWhenLookingBehind = 0.7f;
+    [Range(0f, 1f)][SerializeField] private float headWeightWhenLookingBehind = 0.7f;
     [Tooltip("Weight for body when looking behind")]
-    [Range(0f, 1f)] public float bodyWeightWhenLookingBehind = 0.5f;
+    [Range(0f, 1f)][SerializeField] private float bodyWeightWhenLookingBehind = 0.5f;
     [Tooltip("Weight for head when looking behind and down")]
-    [Range(0f, 1f)] public float headWeightWhenLookingBehindDown = 0.6f;
+    [Range(0f, 1f)][SerializeField] private float headWeightWhenLookingBehindDown = 0.6f;
     [Tooltip("Weight for body when looking behind and down")]
-    [Range(0f, 1f)] public float bodyWeightWhenLookingBehindDown = 0.4f;
+    [Range(0f, 1f)][SerializeField] private float bodyWeightWhenLookingBehindDown = 0.4f;
     [Tooltip("Weight for head when looking behind and up")]
-    [Range(0f, 1f)] public float headWeightWhenLookingBehindUp = 0.8f;
+    [Range(0f, 1f)][SerializeField] private float headWeightWhenLookingBehindUp = 0.8f;
     [Tooltip("Weight for body when looking behind and up")]
-    [Range(0f, 1f)] public float bodyWeightWhenLookingBehindUp = 0.6f;
+    [Range(0f, 1f)][SerializeField] private float bodyWeightWhenLookingBehindUp = 0.6f;
     [Space(1)]
 
     [Header("Sprint Config")]
     [Tooltip("Default weight for the head IK during sprint")]
-    [Range(0f, 1f)] public float sprintHeadWeight = 0.8f;
+    [Range(0f, 1f)][SerializeField] private float sprintHeadWeight = 0.8f;
     [Tooltip("Default weight for the body during sprint")]
-    [Range(0f, 1f)] public float sprintBodyWeight = 0.3f;
+    [Range(0f, 1f)][SerializeField] private float sprintBodyWeight = 0.3f;
     [Tooltip("Weight for head when sprinting and looking behind")]
-    [Range(0f, 1f)] public float sprintHeadWeightWhenLookingBehind = 0.6f;
+    [Range(0f, 1f)][SerializeField] private float sprintHeadWeightWhenLookingBehind = 0.6f;
     [Tooltip("Weight for body when sprinting and looking behind")]
-    [Range(0f, 1f)] public float sprintBodyWeightWhenLookingBehind = 0.4f;
+    [Range(0f, 1f)][SerializeField] private float sprintBodyWeightWhenLookingBehind = 0.4f;
 
     [Header("Smoothing Config")]
     [Tooltip("Speed of the transition")]
-    public float transitionSpeed = 5.0f;
+    [SerializeField] private float transitionSpeed = 5.0f;
     [Tooltip("The minimum speed needed to switch")]
-    [Range(0f, 1f)] public float speedRequired = 0.2f;
+    [Range(0f, 1f)][SerializeField] private float speedRequired = 0.2f;
 
     #region Private's
     // Privates Must Be Assigned Upon Start
-    private StarterAssetsInputs _input;
-    private ThirdPersonController _player;
+    [SerializeField] private StarterAssetsInputs _input;
+    [SerializeField] private FirstPersonController _player;
     private Animator anim;
     private float currentHeadWeight;
     private float currentBodyWeight;
@@ -81,8 +82,6 @@ public class HeadIKEditor : MonoBehaviour
 
     void Start()
     {
-        _input = GetComponent<StarterAssetsInputs>();
-        _player = GetComponent<ThirdPersonController>();
         anim = GetComponent<Animator>();
 
         currentHeadWeight = headWeight;
@@ -109,6 +108,8 @@ public class HeadIKEditor : MonoBehaviour
                     Debug.LogWarning("No valid closest object found.");
                 }
             }
+
+            Debug.LogWarning("an error has broken this script");
         }
     }
     #endregion
